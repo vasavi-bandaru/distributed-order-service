@@ -1,2 +1,8 @@
-# distributed-order-service
-Scalable microservices-based order processing system with Kafka-based event-driven architecture, inventory validation, and payment handling.
+# Distributed Order Service
+
+A Spring Boot backend project to build a scalable order processing system.
+
+## Tech Stack
+- Java 17
+- Spring Boot
+- Maven

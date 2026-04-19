@@ -32,4 +32,17 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleOrderNotFound(OrderNotFoundException ex) {
+
+        ErrorResponse response = new ErrorResponse(
+                UUID.randomUUID().toString(),
+                "ORDER_NOT_FOUND",
+                ex.getMessage(),
+                LocalDateTime.now(),
+                null);
+
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
 }

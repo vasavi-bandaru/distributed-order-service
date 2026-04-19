@@ -3,6 +3,9 @@ package com.orderflow.orderservice.controller;
 import com.orderflow.orderservice.dto.OrderRequest;
 import com.orderflow.orderservice.dto.OrderResponse;
 import com.orderflow.orderservice.service.OrderService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,7 +19,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public OrderResponse createOrder(@RequestBody OrderRequest request) {
+    public OrderResponse createOrder(@Valid @RequestBody OrderRequest request) {
         return orderService.createOrder(request);
     }
 }

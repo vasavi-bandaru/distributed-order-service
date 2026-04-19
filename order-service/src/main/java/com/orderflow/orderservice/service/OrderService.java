@@ -1,9 +1,10 @@
 package com.orderflow.orderservice.service;
 
-import com.orderflow.orderservice.entity.Order;
+import com.orderflow.orderservice.dto.OrderRequest;
+import com.orderflow.orderservice.dto.OrderResponse;
 
 public interface OrderService {
 
-    Order createOrder(Order order);
+    OrderResponse createOrder(OrderRequest request);
 
 }

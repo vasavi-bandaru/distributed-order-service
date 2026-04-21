@@ -8,6 +8,7 @@ import com.orderflow.orderservice.dto.OrderResponse;
 import com.orderflow.orderservice.entity.Order;
 import com.orderflow.orderservice.enums.OrderStatus;
 import com.orderflow.orderservice.enums.PaymentStatus;
+import com.orderflow.orderservice.exception.OrderNotFoundException;
 import com.orderflow.orderservice.repository.OrderRepository;
 import com.orderflow.orderservice.service.OrderService;
 
@@ -52,5 +53,23 @@ public class OrderServiceImpl implements OrderService {
 
     private String generateOrderNumber() {
         return "ORD-" + System.currentTimeMillis();
+    }
+
+    public OrderResponse getOrderByOrderNumber(String orderNumber) {
+        Order order = orderRepository.findByOrderNumber(orderNumber)
+                .orElseThrow(() -> new OrderNotFoundException(orderNumber));
+
+        OrderResponse response = new OrderResponse();
+
+        response.setOrderNumber(order.getOrderNumber());
+        response.setUserId(order.getUserId());
+        response.setProductId(order.getProductId());
+        response.setQuantity(order.getQuantity());
+        response.setTotalPrice(order.getTotalPrice());
+        response.setStatus(order.getStatus().name());
+        response.setPaymentStatus(order.getPaymentStatus().name());
+        response.setCreatedAt(order.getCreatedAt());
+
+        return response;
     }
 }

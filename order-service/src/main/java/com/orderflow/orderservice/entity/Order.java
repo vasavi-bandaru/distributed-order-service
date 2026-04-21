@@ -10,7 +10,11 @@ import com.orderflow.orderservice.enums.PaymentStatus;
 import com.orderflow.orderservice.enums.OrderStatus;
 
 @Entity
-@Table(name = "ORDERS")
+@Table(name = "ORDERS", indexes = {
+        @Index(name = "idx_order_number", columnList = "ORDER_NUMBER"),
+        @Index(name = "idx_user_id", columnList = "USER_ID"),
+        @Index(name = "idx_user_status", columnList = "USER_ID, STATUS")
+})
 @Getter
 @Setter
 @NoArgsConstructor

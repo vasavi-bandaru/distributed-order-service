@@ -22,4 +22,9 @@ public class OrderController {
     public OrderResponse createOrder(@Valid @RequestBody OrderRequest request) {
         return orderService.createOrder(request);
     }
+
+    @GetMapping("/{orderNumber}")
+    public OrderResponse getOrder(@PathVariable String orderNumber) {
+    return orderService.getOrderByOrderNumber(orderNumber);
+}
 }

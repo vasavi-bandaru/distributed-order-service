@@ -8,6 +8,8 @@ import com.orderflow.inventoryservice.entity.Inventory;
 import com.orderflow.inventoryservice.repository.InventoryRepository;
 import com.orderflow.inventoryservice.service.InventoryService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class InventoryServiceImpl implements InventoryService {
 
@@ -21,4 +23,14 @@ public class InventoryServiceImpl implements InventoryService {
     public Optional<Inventory> getByProductId(Long productId) {
         return inventoryRepository.findByProductId(productId);
     }
+
+    @Override
+    @Transactional
+    public void reduceStock(Long productId, int quantity) {
+    int updated = inventoryRepository.reduceStock(productId, quantity);
+
+    if (updated == 0) {
+        throw new RuntimeException("Insufficient stock");
+    }
+}
 }
